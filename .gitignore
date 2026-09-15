@@ -1,0 +1,23 @@
+# --- never publish: instructor answers and French write-ups
+**/instructor_private/
+**/WriteUp_FR_*.md
+
+# --- never publish: legacy French course material (contains live tokens, installers, memory dumps)
+OSINTfr/
+A ENVOYER.zip
+
+# --- OS / editor / python noise
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.html
+
+# --- generated per-case data
+osint-cases/
+personas/
+
+# --- Day 3 answer keys / sensitive links (real leak URLs, .onion)
+Day_3/01_recherche_osint.md
+**/*corrig*
