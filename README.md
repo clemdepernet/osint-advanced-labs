@@ -1,90 +1,211 @@
-# Forensics & OSINT Advanced — Hands-on Labs
+# Forensics & OSINT Advanced — Student Handbook
 
-Teaching material for a three-day advanced course on open-source intelligence and digital forensics: slide decks, lab assignments, scripts, templates and synthetic datasets. Everything a student needs to run the labs is here. Instructor answer keys are **not** published.
+Welcome. This repository is your field manual for a three-day advanced course on **open-source intelligence** and **digital forensics**. Everything you need to run the labs lives here: slide decks, hands-on assignments, ready-to-run scripts, synthetic datasets and three printable cheat sheets.
 
-> Audience: intelligence analysts, security professionals, law-enforcement and corporate investigators with prior OSINT experience.
-> Working language of the material: English. Some legacy exercises were translated from French.
+> **Working language:** English. **Audience:** analysts, security professionals and investigators with prior OSINT experience.
+> **Golden thread of the course:** collect rigorously, verify by convergence, and report so an auditor could reproduce you.
 
-## Course map
+---
 
-| Day | Morning (theory) | Afternoon (labs in this repo) |
+## The three days
+
+| Day | Theme | You will practise |
 |---|---|---|
-| **Day 1** — Operational security & automation | Threat modelling, attribution postures, personas, fingerprinting, Python for OSINT, APIs, pipelines | [Who Am I?](Day_1/Who%20Am%20I%20Lab/) (opening challenge) · [SecOps Lab](Day_1/SecOps%20Lab/) |
-| **Day 2** — Source reliability & media forensics | Admiralty Code, fact-checking, coordinated inauthentic behaviour, image/video forensics, C2PA, geolocation | [Geosint Lab](Day_2/Geosint%20Lab/) · [Media Forensics Lab](Day_2/Media%20Forensics%20Lab/) |
-| **Day 3** — Dark web, crypto tracing & capstone | Tor and hidden services, sensitive groups, on-chain tracing, chokepoints, automated monitor | [Data Breach Analysis](Hand's%20on%20exercises/Databreach.pdf) · [Crypto Investigation](Hand's%20on%20exercises/Crypto%20Investigation.pdf) |
+| **Day 1** — Operational security & automation | Threat modelling, attribution, personas, fingerprinting, Python & APIs | [Who Am I?](Day_1/Who%20Am%20I%20Lab/) · [SecOps Lab](Day_1/SecOps%20Lab/) |
+| **Day 2** — Source reliability & collection techniques | Admiralty Code, disinformation & CIB, media forensics, scraping | [Email Harvester](Day_2/Email%20Harvester%20Lab/) · [API Scraping](Day_2/API%20Scraping%20Lab/) · [Geosint](Day_2/Geosint%20Lab/) · [Data Breach](Day_2/Databreach.pdf) · [Media Forensics](Day_2/Media%20Forensics%20Lab/) |
+| **Day 3** — Dark web, crypto tracing & capstone | Tor & hidden services, on-chain tracing, automated monitor | [Crypto Investigation](Day_3/Crypto%20Investigation.pdf) |
 
-Slides for each day are in `Day_N/*.pptx`.
+Each day's slide deck is the `*.pptx` in its folder. Each lab folder has its own `README` and a step-by-step subject as both Markdown and PDF.
 
-## The labs
+---
 
-### Day 1 · Who Am I? — opening challenge (75 min)
-Students profile the instructor under signed rules of engagement, deliver an Admiralty-rated intel card, then discover who showed up in the target's profile-viewer list. Sets the tone for the OPSEC day.
-`WhoAmI_Lab.md` · rules of engagement · intel card template.
+## All labs at a glance
 
-### Day 1 · SecOps Lab — persona, footprint & disposable environment (3h30)
-Threat model first, then a self-built **disposable OSINT container** (Debian + Tor + pivot tools), browser-fingerprint testing, a coherent research **persona** with collision checks, reduction of the analyst's own footprint, and a fully documented **Hunchly** browsing session.
-Scripts: `Dockerfile.osint`, `osint_case.sh` (one container per case), `opsec_check.sh` (GO / NO-GO pre-flight), `persona_forge.py`, `footprint_audit.py`.
+| Lab | You build | Skills | Folder |
+|---|---|---|---|
+| **Who Am I?** | An Admiralty-rated intel card on a consenting target | Pivoting, sourcing, OPSEC awareness | [open](Day_1/Who%20Am%20I%20Lab/) |
+| **SecOps Lab** | A disposable OSINT container, a research persona, a Hunchly case | OPSEC, personas, footprint reduction, chain of custody | [open](Day_1/SecOps%20Lab/) |
+| **Email Harvester** | A recursive e-mail crawler in Bash | `curl`, regex, crawl logic | [open](Day_2/Email%20Harvester%20Lab/) |
+| **API Scraping** | A product scraper from an intercepted session | Burp Suite, `requests`, pagination | [open](Day_2/API%20Scraping%20Lab/) |
+| **Geosint** | A geolocation + chronolocation verification note | OSM/Overpass, Street View, SunCalc | [open](Day_2/Geosint%20Lab/) |
+| **Data Breach** | An exposure analysis of a leaked SQL dump | SQLAlchemy, pandas, GDPR reasoning | [open](Day_2/Databreach.pdf) |
+| **Media Forensics** | A verification note on a fabricated campaign | EXIF, ELA, C2PA, video, CIB | [open](Day_2/Media%20Forensics%20Lab/) |
+| **Crypto Investigation** | An on-chain genealogy of a memecoin | Solscan, DexScreener, `requests` | [open](Day_3/Crypto%20Investigation.pdf) |
 
-### Day 2 · Geosint Lab — Operation Glass Eye (75 min)
-Two warm-up photos to geolocate and chronolocate, then a drone's last transmitted frame to place within three decimals using OpenStreetMap/Overpass, satellite imagery, Street View and SunCalc. Deliverable: a verification note with chain of custody.
+---
 
-### Day 2 · Media Forensics Lab — Operation Riverbank (3h)
-Five workshops on one fabricated disinformation case: forged metadata and mismatched thumbnails, Error Level Analysis and shadow coherence, reverse image search and Content Credentials (C2PA), video cut and splice detection with ffmpeg, coordinated-behaviour detection with pandas and NetworkX. The dataset is **100 % synthetic** (no real person, place or copyrighted media) and regenerable with `scripts/make_dataset.py`.
+## Cheat sheets — keep these open
 
-### Day 3 · Data Breach Analysis & Crypto Investigation
-Two assignments: exploring a leaked SQL dump with SQLAlchemy/pandas (GDPR impact, schema discovery, KPIs), and tracing a Solana memecoin from on-chain identifiers to Web2 footprints, deployer and liquidity analysis.
+| Sheet | For |
+|---|---|
+| [Linux Basics](Cheatsheets/01_Linux_Basics_Cheatsheet.pdf) | moving around the terminal, files, pipes, permissions |
+| [Bash Scripting](Cheatsheets/02_Bash_Scripting_Cheatsheet.pdf) | variables, conditions, loops, functions, good habits |
+| [Kali & OSINT Tools](Cheatsheets/03_Kali_OSINT_Tools_Cheatsheet.pdf) | sherlock, maigret, holehe, curl, hashcat, ffuf, exiftool, nmap… |
+
+---
+
+## Quick start
+
+```bash
+git clone https://github.com/clemdepernet/osint-advanced-labs.git
+cd osint-advanced-labs
+```
+
+**Host tooling (once):**
+```bash
+# macOS
+brew install exiftool ffmpeg jq
+# Debian / Kali
+sudo apt install -y libimage-exiftool-perl ffmpeg jq
+
+# Python analysis stack (Day 2 & 3)
+pip install requests pandas numpy networkx pillow faker sqlalchemy pymysql
+
+# Username / e-mail pivot tools
+pipx install sherlock-project holehe maigret
+```
+
+**Day 1 — build the disposable investigation container (≈2 GB, once):**
+```bash
+cd "Day_1/SecOps Lab/scripts"
+docker build -t osint-lab:latest -f Dockerfile.osint .
+./osint_case.sh start CASE-042        # one container per case; Tor starts inside
+```
+
+---
+
+## The investigator's five reminders
+
+Print these on the inside of your eyelids.
+
+1. **Threat model first.** OPSEC is *proportionate*, not maximal. Decide who you protect against before you collect.
+2. **Passive on real people.** No contact, no login, no password-reset probes. The only real target in this course is the instructor, by written consent.
+3. **Rate everything (Admiralty).** Separate the *source* (A–F) from the *information* (1–6). A `C3` that is true beats an `A1` that is false.
+4. **Chain of custody.** For anything that matters: the **URL**, a **UTC timestamp**, and a **SHA-256** of the artefact. Archive a copy.
+5. **Convergence, never one clue.** Metadata, signal, geo/chrono and cross-checking converge or diverge. The verdict lives in the *weight of evidence*.
+
+### The Admiralty scale
+
+| Source | Reliability | | Info | Credibility |
+|---|---|---|---|---|
+| **A** | Completely reliable | | **1** | Confirmed by other sources |
+| **B** | Usually reliable | | **2** | Probably true |
+| **C** | Fairly reliable | | **3** | Possibly true |
+| **D** | Not usually reliable | | **4** | Doubtful |
+| **E** | Unreliable | | **5** | Improbable |
+| **F** | Cannot be judged | | **6** | Cannot be judged |
+
+---
+
+## Snippet grab-bag
+
+The greatest hits you will reach for daily. Full versions are in the cheat sheets.
+
+```bash
+# --- Chain of custody on any file
+sha256sum evidence.jpg ; date -u +%FT%TZ
+exiftool -a -G1 evidence.jpg                 # all metadata
+exiftool -all= -overwrite_original clean.jpg # STRIP metadata before sharing
+
+# --- Username & e-mail pivots
+sherlock johndoe --print-found
+maigret johndoe --html
+holehe target@example.com --only-used
+
+# --- curl for APIs & recon
+curl -s -H "Authorization: Bearer $TOKEN" -H "Accept: application/json" "$URL" | jq '.'
+curl -s "https://crt.sh/?q=%25.example.com&output=json" | jq -r '.[].name_value' | sort -u
+
+# --- Recursive e-mail harvest (Day 2, TP1)
+EMAIL='[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
+curl -sL "$URL" | grep -oE "$EMAIL" | sort -u
+
+# --- Encoding
+printf 'OSINT' | base64            # T1NJTlQ=
+echo 'T1NJTlQ=' | base64 -d        # OSINT
+
+# --- Geosint: candidates near a point (OpenStreetMap / Overpass)
+curl -s https://overpass-api.de/api/interpreter --data-urlencode \
+  'data=[out:csv(::lat,::lon)];node["generator:source"="wind"](around:8000,47.5988,-1.1389);out;'
+
+# --- Anonymity check (inside the container)
+curl --socks5-hostname 127.0.0.1:9050 https://check.torproject.org/api/ip
+```
+
+```python
+# --- API replay & paginate (Day 2, TP2)
+s = requests.Session(); s.headers["Authorization"] = f"Bearer {token}"
+hits = []
+while start < total:
+    hits += s.get(url, params={"c_start": start, "c_sz": 48}).json()["hits"]
+    start += 48
+pd.json_normalize(hits).to_csv("products.csv", index=False)
+```
+
+---
+
+## Useful URLs
+
+**Usernames & e-mail**
+- WhatsMyName — https://whatsmyname.app
+- Have I Been Pwned — https://haveibeenpwned.com
+- Pwned Passwords (k-anonymity) — https://api.pwnedpasswords.com
+
+**Images & media forensics**
+- Google Lens · Yandex Images · TinEye — reverse image search
+- FotoForensics — https://fotoforensics.com · Forensically — https://29a.ch/photo-forensics
+- InVID/WeVerify — browser extension for video
+- Content Credentials (C2PA) verify — https://contentcredentials.org/verify
+
+**Geolocation**
+- OpenStreetMap — https://www.openstreetmap.org · Overpass Turbo — https://overpass-turbo.eu
+- SunCalc — https://www.suncalc.org · OpenInfraMap — https://openinframap.org
+
+**Infrastructure & archives**
+- crt.sh (certificate transparency) — https://crt.sh
+- Wayback Machine — https://web.archive.org · Shodan — https://www.shodan.io
+
+**OPSEC & tooling**
+- Tor Browser — https://www.torproject.org · Cover Your Tracks — https://coveryourtracks.eff.org
+- amiunique — https://amiunique.org · Hunchly — https://www.hunch.ly
+- CyberChef — https://gchq.github.io/CyberChef
+
+---
+
+## Ground rules (non-negotiable)
+
+- **Authorisation before action.** Recon, content discovery and hash cracking are legal only on assets you own or a written engagement scope. When in doubt, stop.
+- **Minimise & protect data.** Collect only what the task needs. Anonymise personal data in your deliverables (GDPR).
+- **Your homework has OPSEC too.** A real IP, a personal credential or unmasked personal data left in a submission costs points.
+- **Tools are neutral; authorisation is what makes their use legitimate.**
+
+---
 
 ## Repository layout
 
 ```
-Day_1/
-  Day_1_Operational_Security_And_Automation.pptx
-  Who Am I Lab/        subject (md + pdf), templates/
-  SecOps Lab/          subject (md + pdf), scripts/, templates/
-Day_2/
-  Day_2_Source_Reliability_And_Media_Forensics.pptx
-  Geosint Lab/         subject, material/ (3 images), templates/
-  Media Forensics Lab/ subject, scripts/, templates/, dataset/ (generated, seed 42)
-Day_3/
-  Day_3_Dark_Web_Crypto_And_Capstone.pptx
-Hand's on exercises/   Databreach.pdf, Crypto Investigation.pdf
+Cheatsheets/            Linux · Bash · Kali/OSINT (md + pdf)
+Day_1/                  OPSEC & automation
+  Who Am I Lab/         opening challenge (subject + templates)
+  SecOps Lab/           container, persona, footprint, Hunchly (scripts + templates)
+Day_2/                  reliability & collection techniques
+  Email Harvester Lab/  bash/curl/regex recursive scraper
+  API Scraping Lab/     Burp + Python
+  Geosint Lab/          geolocation & chronolocation (+ material)
+  Media Forensics Lab/  synthetic disinformation case (+ generated dataset)
+  Databreach.pdf        leaked SQL dump analysis
+Day_3/                  dark web, crypto & capstone
+  Crypto Investigation.pdf
 ```
 
-Each lab folder has its own `README.md`. Every subject follows the same structure: learning objectives, scenario, numbered steps with questions, deliverables, grading grid, optional extensions.
+Every lab subject follows the same shape: **learning objectives → scenario → numbered steps with questions → deliverables → grading grid → optional extensions**.
 
-## Quick start (students)
-
-```bash
-git clone https://github.com/<owner>/osint-advanced-labs.git
-cd osint-advanced-labs
-
-# Day 1 - build the disposable investigation container once (~2 GB)
-cd "Day_1/SecOps Lab/scripts"
-docker build -t osint-lab:latest -f Dockerfile.osint .
-./osint_case.sh start CASE-042
-
-# Day 2 - analysis tooling on the host
-pip install pillow pandas numpy networkx imageio-ffmpeg faker requests
-```
-
-Tools referenced across the labs: Docker, Python 3.10+, `exiftool`, `ffmpeg`, `sherlock`, `holehe`, `maigret`, Tor, Hunchly (30-day trial), Google Lens / Yandex / TinEye, SunCalc, Overpass Turbo, Content Credentials Verify.
-
-## Ground rules baked into every lab
-
-- **Legal and ethical perimeter first.** Personas and infiltration are regulated; every lab states what is out of scope.
-- **Passive collection only** on real people. The only real target in the course is the instructor, by written consent and under rules of engagement.
-- **Nothing is proof by itself.** Metadata, ELA, geolocation, provenance and cross-checking converge or diverge; verdicts rest on the weight of evidence.
-- **Chain of custody.** URL, UTC timestamp, SHA-256 and archive for everything that matters.
-- **OPSEC applies to homework too.** Personal credentials, real IPs or unmasked personal data in a submission cost points.
+---
 
 ## For instructors
 
-Answer keys, French write-ups, ground-truth files and the generator seeds' outputs live outside this repository. If you teach with this material and want them, open an issue or contact the author.
-
-## Contributing
-
-Issues and pull requests are welcome: broken links, tools that changed their CLI, new warm-up material, translations. Please do not submit answer keys or real personal data.
+Answer keys, French write-ups (`WriteUp_FR_*`), ground-truth files and dataset seeds are **not** in this repository. If you teach with this material and need them, open an issue.
 
 ## License
 
-Course material © Clement Depernet. Text, slides and templates are released under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/); scripts under the [MIT License](https://opensource.org/licenses/MIT). Third-party tools and sample files keep their own licenses.
+Course content (slides, subjects, templates, cheat sheets) — **CC BY-NC-SA 4.0**. Scripts (`*.py`, `*.sh`, `Dockerfile*`) — **MIT**. Third-party tools and sample files keep their own licenses. © Clement Depernet.
