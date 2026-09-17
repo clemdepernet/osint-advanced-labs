@@ -1,0 +1,4 @@
+# The core monitor uses only the Python standard library (urllib, xml, json).
+# No third-party package is required to run watch.py against the keyless sources.
+# Optional enrichment connectors may need:
+#   requests            # nicer HTTP if you extend the collectors

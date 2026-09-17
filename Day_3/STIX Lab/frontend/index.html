@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>STIX Team Dashboard</title>
+<style>
+:root{--bg:#0d141c;--panel:#151f2b;--ink:#e8eef5;--mut:#8aa0b4;--line:#25384c;--accent:#3aa0ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+header{display:flex;align-items:baseline;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line)}
+h1{font-size:18px;margin:0}.sub{color:var(--mut);font-size:12px}
+.tlp{margin-left:auto;font-weight:700;font-size:11px;padding:2px 8px;border-radius:4px;background:#3a2f00;color:#ffd23f;border:1px solid #ffd23f}
+.main{display:flex;height:calc(100vh - 50px)}
+.graph{flex:1;position:relative}
+svg{width:100%;height:100%;display:block}
+.filters{position:absolute;top:10px;left:10px;background:rgba(21,31,43,.9);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;max-width:210px}
+.filters label{display:block;margin:2px 0;color:var(--mut);cursor:pointer}
+.side{width:320px;border-left:1px solid var(--line);padding:14px;overflow:auto;background:var(--panel)}
+.side h2{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:0 0 8px}
+.kv{font-size:12px;margin:3px 0;word-break:break-word}.kv b{color:var(--mut);font-weight:600}
+.pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;border:1px solid var(--line);color:var(--mut)}
+.legend{position:absolute;bottom:10px;left:10px;background:rgba(21,31,43,.9);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:5px;margin-right:10px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+node{cursor:pointer}
+text{fill:var(--ink);font-size:10px;pointer-events:none}
+.elabel{fill:var(--mut);font-size:9px}
+line.edge{stroke:#3a5169;stroke-width:1.2}
+</style></head><body>
+<header><h1>STIX Team Dashboard</h1><span class="sub" id="meta"></span><span class="tlp" id="tlp">TLP</span></header>
+<div class="main">
+  <div class="graph">
+    <div class="filters" id="filters"></div>
+    <svg id="svg"><g id="edges"></g><g id="nodes"></g></svg>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="side"><h2>Details</h2><div id="detail" class="kv">Click a node.</div></div>
+</div>
+<script src="data.js"></script>
+<script>
+const B = window.BUNDLE || {objects:[]};
+const objs = B.objects;
+const byId = Object.fromEntries(objs.map(o=>[o.id,o]));
+const COLOR = {"threat-actor":"#e9573f","identity":"#3aa0ff","malware":"#c65cff","attack-pattern":"#f2913d",
+ "indicator":"#f2c744","infrastructure":"#2ecc71","domain-name":"#20c9b0","ipv4-addr":"#20c9b0",
+ "observed-data":"#8aa0b4","report":"#ffffff","tool":"#7ed957","vulnerability":"#f25f5c"};
+const label = o => o.name || o.value || (o.abstract) || o.type;
+// nodes: everything graph-worthy (skip markings, notes/opinions/reports shown but small)
+const SKIP = new Set(["marking-definition","relationship","sighting"]);
+let nodes = objs.filter(o=>!SKIP.has(o.type)).map(o=>({id:o.id,type:o.type,o}));
+// edges: relationships + sightings + observed-data refs
+let edges = [];
+objs.filter(o=>o.type==="relationship").forEach(r=>edges.push({s:r.source_ref,t:r.target_ref,l:r.relationship_type}));
+objs.filter(o=>o.type==="sighting").forEach(s=>(s.where_sighted_refs||[]).forEach(w=>edges.push({s:s.sighting_of_ref,t:w,l:"sighted-at"})));
+objs.filter(o=>o.type==="observed-data").forEach(od=>(od.object_refs||[]).forEach(r=>edges.push({s:od.id,t:r,l:"contains"})));
+const nodeIds = new Set(nodes.map(n=>n.id));
+edges = edges.filter(e=>nodeIds.has(e.s) && nodeIds.has(e.t));
+
+document.getElementById("meta").textContent = `${nodes.length} objects · ${edges.length} links · spec ${B.objects[0]?.spec_version||"2.1"}`;
+document.getElementById("tlp").textContent = "TLP:AMBER";
+
+// filters
+const types=[...new Set(nodes.map(n=>n.type))].sort();
+const active=new Set(types);
+document.getElementById("filters").innerHTML = "<b style='color:var(--mut)'>Show types</b>" +
+ types.map(t=>`<label><input type=checkbox checked data-t="${t}"> <span class=dot style="background:${COLOR[t]||'#888'}"></span>${t}</label>`).join("");
+document.querySelectorAll("#filters input").forEach(cb=>cb.onchange=()=>{cb.checked?active.add(cb.dataset.t):active.delete(cb.dataset.t);draw();});
+document.getElementById("legend").innerHTML="Node colour = STIX type · border = TLP · size ∝ confidence";
+
+// force layout
+const svg=document.getElementById("svg");
+let W=svg.clientWidth||900,H=svg.clientHeight||600;
+nodes.forEach((n,i)=>{n.x=W/2+Math.cos(i)*200*Math.random();n.y=H/2+Math.sin(i)*200*Math.random();n.vx=0;n.vy=0;});
+function sim(){
+ for(let it=0;it<220;it++){
+  for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+   const a=nodes[i],b=nodes[j];let dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy)||1;
+   const f=2600/(d*d);a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f;}
+  edges.forEach(e=>{const a=nodes.find(n=>n.id===e.s),b=nodes.find(n=>n.id===e.t);
+   let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,f=(d-120)*0.02;
+   a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f;});
+  nodes.forEach(n=>{n.vx+=(W/2-n.x)*0.002;n.vy+=(H/2-n.y)*0.002;n.x+=n.vx*=0.85;n.y+=n.vy*=0.85;
+   n.x=Math.max(40,Math.min(W-40,n.x));n.y=Math.max(40,Math.min(H-40,n.y));});
+ }
+}
+function conf(o){return o.confidence||o.o?.confidence||0;}
+function draw(){
+ const eg=document.getElementById("edges"),ng=document.getElementById("nodes");
+ const vis=n=>active.has(n.type);
+ eg.innerHTML=edges.filter(e=>active.has(byId[e.s].type)&&active.has(byId[e.t].type)).map(e=>{
+  const a=nodes.find(n=>n.id===e.s),b=nodes.find(n=>n.id===e.t);if(!a||!b)return"";
+  return `<line class="edge" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" />`+
+   `<text class="elabel" x="${(a.x+b.x)/2}" y="${(a.y+b.y)/2}">${e.l}</text>`;}).join("");
+ ng.innerHTML=nodes.filter(vis).map(n=>{
+  const r=8+(n.o.confidence?n.o.confidence/12:0);
+  return `<g class="node" data-id="${n.id}"><circle cx="${n.x}" cy="${n.y}" r="${r}" `+
+    `fill="${COLOR[n.type]||'#889'}" stroke="#ffd23f" stroke-width="1.6" />`+
+   `<text x="${n.x+r+3}" y="${n.y+3}">${(label(n.o)||'').slice(0,26)}</text></g>`;}).join("");
+ document.querySelectorAll("#nodes .node").forEach(g=>g.onclick=()=>show(byId[g.dataset.id]));
+}
+function show(o){
+ const rows=Object.entries(o).filter(([k])=>!["object_marking_refs","granular_markings"].includes(k))
+  .map(([k,v])=>`<div class=kv><b>${k}</b>: ${typeof v==="object"?JSON.stringify(v):String(v)}</div>`).join("");
+ document.getElementById("detail").innerHTML=`<div class=pill>${o.type}</div>`+rows;
+}
+sim();draw();
+</script></body></html>

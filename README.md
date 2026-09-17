@@ -12,8 +12,8 @@ Welcome. This repository is your field manual for a three-day advanced course on
 | Day | Theme | You will practise |
 |---|---|---|
 | **Day 1** — Operational security & automation | Threat modelling, attribution, personas, fingerprinting, Python & APIs | [Who Am I?](Day_1/Who%20Am%20I%20Lab/) · [SecOps Lab](Day_1/SecOps%20Lab/) |
-| **Day 2** — Source reliability & collection techniques | Admiralty Code, disinformation & CIB, media forensics, scraping | [Email Harvester](Day_2/Email%20Harvester%20Lab/) · [API Scraping](Day_2/API%20Scraping%20Lab/) · [Geosint](Day_2/Geosint%20Lab/) · [Data Breach](Day_2/Databreach.pdf) · [Media Forensics](Day_2/Media%20Forensics%20Lab/) |
-| **Day 3** — Dark web, crypto tracing & capstone | Tor & hidden services, on-chain tracing, automated monitor | [Crypto Investigation](Day_3/Crypto%20Investigation.pdf) |
+| **Day 2** — Source reliability & collection techniques | Admiralty Code, disinformation & CIB, media forensics, scraping | [Email Harvester](Day_2/Email%20Harvester%20Lab/) · [API Scraping](Day_2/API%20Scraping%20Lab/) · [Geosint](Day_2/Geosint%20Lab/) · [Media Forensics](Day_2/Media%20Forensics%20Lab/) |
+| **Day 3** — Dark web, blockchain tracing & structured intelligence | Blockchain fundamentals, crypto tracing, STIX & MITRE ATT&CK, agentic automation | [Data Breach](Day_3/Databreach.pdf) · [Crypto Investigation](Day_3/Crypto%20Investigation.pdf) · [STIX Lab](Day_3/STIX%20Lab/) · [Corporate Watch](Day_3/Corporate%20Watch%20Lab/) |
 
 Each day's slide deck is the `*.pptx` in its folder. Each lab folder has its own `README` and a step-by-step subject as both Markdown and PDF.
 
@@ -28,9 +28,11 @@ Each day's slide deck is the `*.pptx` in its folder. Each lab folder has its own
 | **Email Harvester** | A recursive e-mail crawler in Bash | `curl`, regex, crawl logic | [open](Day_2/Email%20Harvester%20Lab/) |
 | **API Scraping** | A product scraper from an intercepted session | Burp Suite, `requests`, pagination | [open](Day_2/API%20Scraping%20Lab/) |
 | **Geosint** | A geolocation + chronolocation verification note | OSM/Overpass, Street View, SunCalc | [open](Day_2/Geosint%20Lab/) |
-| **Data Breach** | An exposure analysis of a leaked SQL dump | SQLAlchemy, pandas, GDPR reasoning | [open](Day_2/Databreach.pdf) |
+| **Data Breach** | An exposure analysis of a leaked SQL dump | SQLAlchemy, pandas, GDPR reasoning | [open](Day_3/Databreach.pdf) |
 | **Media Forensics** | A verification note on a fabricated campaign | EXIF, ELA, C2PA, video, CIB | [open](Day_2/Media%20Forensics%20Lab/) |
 | **Crypto Investigation** | An on-chain genealogy of a memecoin | Solscan, DexScreener, `requests` | [open](Day_3/Crypto%20Investigation.pdf) |
+| **STIX Lab** | A STIX 2.1 threat graph, built and automated | `stix2`, parallel agents, team dashboard | [open](Day_3/STIX%20Lab/) |
+| **Corporate Watch** | An aggregate competitive-intelligence monitor | OpenAlex, news RSS, dashboard | [open](Day_3/Corporate%20Watch%20Lab/) |
 
 ---
 
@@ -193,9 +195,11 @@ Day_2/                  reliability & collection techniques
   API Scraping Lab/     Burp + Python
   Geosint Lab/          geolocation & chronolocation (+ material)
   Media Forensics Lab/  synthetic disinformation case (+ generated dataset)
-  Databreach.pdf        leaked SQL dump analysis
-Day_3/                  dark web, crypto & capstone
-  Crypto Investigation.pdf
+Day_3/                  dark web, blockchain tracing & structured intelligence
+  Databreach.pdf             leaked SQL dump analysis (read-only, GDPR)
+  Crypto Investigation.pdf   on-chain genealogy of a memecoin
+  STIX Lab/                  build + automate a STIX 2.1 threat graph (stix2, agents, dashboard)
+  Corporate Watch Lab/       aggregate competitive-intelligence monitor (public sources only)
 ```
 
 Every lab subject follows the same shape: **learning objectives → scenario → numbered steps with questions → deliverables → grading grid → optional extensions**.

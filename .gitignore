@@ -12,7 +12,7 @@ __pycache__/
 *.pyc
 .venv/
 venv/
-*.html
+*.pdf.html
 
 # --- generated per-case data
 osint-cases/

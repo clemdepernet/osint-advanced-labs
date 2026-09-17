@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corporate Watch</title>
+<style>
+:root{--bg:#0f1720;--panel:#16212e;--ink:#e8eef5;--mut:#8aa0b4;--line:#26374a;--accent:#3aa0ff;
+ --a:#2ecc71;--b:#7ed957;--c:#f2c744;--d:#f2913d;--e:#e9573f;--f:#7f8c9a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+ font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:20px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px}
+h1{font-size:22px;margin:0}.sub{color:var(--mut);font-size:13px}
+.banner{margin:12px 0;padding:8px 12px;border-left:3px solid var(--accent);background:#12202f;color:var(--mut);font-size:12.5px;border-radius:4px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px}
+.card h2{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+.bar{display:flex;align-items:center;gap:8px;margin:5px 0}
+.bar .lab{width:150px;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .track{flex:1;background:#0e1926;border-radius:4px;height:16px;overflow:hidden}
+.bar .fill{height:100%;background:linear-gradient(90deg,#2b6fb3,#3aa0ff)}
+.bar .val{width:44px;text-align:right;color:var(--mut);font-variant-numeric:tabular-nums;font-size:12px}
+.spark{display:flex;align-items:stretch;gap:6px;height:120px;padding-top:6px}
+.spark .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+.spark .b{width:100%;background:linear-gradient(180deg,#3aa0ff,#2b6fb3);border-radius:3px 3px 0 0}
+.spark .y{font-size:11px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;position:sticky;top:0;background:var(--panel)}
+.feed{max-height:420px;overflow:auto}
+.badge{display:inline-block;min-width:18px;text-align:center;border-radius:4px;padding:1px 5px;font-weight:700;color:#08131c}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:10px;padding:0 8px;font-size:11px;color:var(--mut)}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.rA{background:var(--a)}.rB{background:var(--b)}.rC{background:var(--c)}.rD{background:var(--d)}.rE{background:var(--e)}.rF{background:var(--f);color:#fff}
+.legend{color:var(--mut);font-size:11.5px;margin-top:8px}
+.kpi{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px}
+.kpi div{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.kpi b{font-size:20px}.kpi span{color:var(--mut);font-size:12px;display:block}
+</style></head><body><div class="wrap">
+<header><h1 id="co">Corporate Watch</h1><span class="sub" id="gen"></span></header>
+<div class="banner" id="ban"></div>
+<div class="kpi" id="kpi"></div>
+<div class="grid">
+  <div class="card"><h2>R&amp;D capability map — publications by domain</h2><div id="concepts"></div>
+    <div class="legend">Source: OpenAlex, aggregated. No author identities stored.</div></div>
+  <div class="card"><h2>R&amp;D output trend — publications / year</h2><div class="spark" id="yearly"></div></div>
+  <div class="card"><h2>Aggregate hiring-demand signal by domain</h2><div id="hiring"></div>
+    <div class="legend">Public job-posting mention counts. A demand signal, never a person.</div></div>
+  <div class="card"><h2>Event mix</h2><div id="events"></div></div>
+</div>
+<div class="card" style="margin-top:16px"><h2>Macro-corporate news feed</h2>
+  <div class="feed"><table><thead><tr><th>Rel.</th><th>Type</th><th>Headline</th><th>Info</th></tr></thead>
+  <tbody id="news"></tbody></table></div>
+  <div class="legend">Rel. = Admiralty source reliability (A–F). Info (1–6) is left blank for the analyst to rate. Verify before acting.</div>
+</div>
+</div>
+<script src="data.js"></script>
+<script>
+const D = window.DATA || {};
+const $ = id => document.getElementById(id);
+$("co").textContent = "Corporate Watch — " + (D.company||"");
+$("gen").textContent = "generated " + (D.generated||"");
+$("ban").textContent = D.compliance || "";
+function bars(el, rows, labelKey, valKey){
+  const max = Math.max(1, ...rows.map(r=>r[valKey]));
+  el.innerHTML = rows.map(r=>`<div class="bar"><div class="lab" title="${r[labelKey]}">${r[labelKey]}</div>
+    <div class="track"><div class="fill" style="width:${100*r[valKey]/max}%"></div></div>
+    <div class="val">${r[valKey]}</div></div>`).join("");
+}
+bars($("concepts"), (D.rnd?.concepts||[]), "domain", "works");
+bars($("hiring"), (D.hiring_demand||[]).slice().sort((a,b)=>b.demand_signal-a.demand_signal), "domain", "demand_signal");
+bars($("events"), (D.event_breakdown||[]), "type", "count");
+// yearly sparkbars
+const ys = D.rnd?.yearly||[]; const ymax = Math.max(1,...ys.map(y=>y.works));
+$("yearly").innerHTML = ys.map(y=>`<div class="col"><div class="b" style="height:${Math.round(90*y.works/ymax)+8}px"></div><div class="y">${y.year}</div></div>`).join("");
+// kpis
+const ev = D.events||[];
+$("kpi").innerHTML = [
+  ["Domains tracked", (D.rnd?.concepts||[]).length],
+  ["News events", ev.length],
+  ["Contracts/orders", ev.filter(e=>e.event_type==="Contract / order").length],
+  ["M&A + Divestiture", ev.filter(e=>/M&A|Divest/.test(e.event_type)).length],
+].map(([s,v])=>`<div><b>${v}</b><span>${s}</span></div>`).join("");
+// news feed
+$("news").innerHTML = ev.map(e=>`<tr>
+  <td><span class="badge r${e.reliability}">${e.reliability}</span></td>
+  <td><span class="tag">${e.event_type}</span></td>
+  <td><a href="${e.url}" target="_blank" rel="noopener">${e.title}</a></td>
+  <td style="color:#8aa0b4">${e.info_rating}</td></tr>`).join("");
+</script></body></html>

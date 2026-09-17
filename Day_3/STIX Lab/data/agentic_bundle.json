@@ -1,0 +1,151 @@
+{
+  "type": "bundle",
+  "id": "bundle--bc8ee9e1-7d91-4fe3-bd89-356e3082c5f0",
+  "objects": [
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--bd397f91-9cdd-40fd-9b36-458849698bd0",
+      "created": "2026-09-17T22:13:05.378163Z",
+      "modified": "2026-09-17T22:13:05.378163Z",
+      "name": "AeroParts Supplier Ltd",
+      "identity_class": "organization",
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "domain-name",
+      "spec_version": "2.1",
+      "id": "domain-name--5ac6b142-3d17-5640-87a6-acf0a7272ad6",
+      "value": "aeroparts-hr-portal.com"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--4eb53415-e042-402e-af9e-f585113e8ce9",
+      "created": "2026-09-17T22:13:05.380921Z",
+      "modified": "2026-09-17T22:13:05.380921Z",
+      "name": "domain aeroparts-hr-portal.com",
+      "pattern": "[domain-name:value = 'aeroparts-hr-portal.com']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "confidence": 60,
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "domain-name",
+      "spec_version": "2.1",
+      "id": "domain-name--ff48593a-2b32-5bdf-a1e9-57b6fd88fff3",
+      "value": "login-aeroparts.net"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--c65de773-fdab-4370-ab0f-f5e3ceed639d",
+      "created": "2026-09-17T22:13:05.388861Z",
+      "modified": "2026-09-17T22:13:05.388861Z",
+      "name": "domain login-aeroparts.net",
+      "pattern": "[domain-name:value = 'login-aeroparts.net']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "confidence": 60,
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "domain-name",
+      "spec_version": "2.1",
+      "id": "domain-name--c109cae3-435a-53f8-a646-8d17a1ef629e",
+      "value": "vpn.aeroparts.io"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--49355e5f-5962-4aef-9fc2-7b6185600d93",
+      "created": "2026-09-17T22:13:05.389745Z",
+      "modified": "2026-09-17T22:13:05.389745Z",
+      "name": "domain vpn.aeroparts.io",
+      "pattern": "[domain-name:value = 'vpn.aeroparts.io']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "confidence": 60,
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--c2a97333-cd14-5dbc-b416-6a39a80416f5",
+      "value": "185.199.51.23"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--e604c759-042b-5f45-8a47-c00e3abde48a",
+      "value": "45.67.89.10"
+    },
+    {
+      "type": "note",
+      "spec_version": "2.1",
+      "id": "note--9d1c635c-9709-4af6-b47e-8c8d52796a0c",
+      "created": "2026-09-17T22:13:05.390475Z",
+      "modified": "2026-09-17T22:13:05.390475Z",
+      "abstract": "collector note",
+      "content": "Supplier named in a 2026 phishing wave (source B2).",
+      "object_refs": [
+        "identity--bd397f91-9cdd-40fd-9b36-458849698bd0"
+      ],
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "report",
+      "spec_version": "2.1",
+      "id": "report--42b8f5f0-1887-4d64-99cd-cdceeeef4a0b",
+      "created_by_ref": "identity--bd397f91-9cdd-40fd-9b36-458849698bd0",
+      "created": "2026-09-17T22:13:05.390915Z",
+      "modified": "2026-09-17T22:13:05.390915Z",
+      "name": "Agentic collection: AeroParts Supplier Ltd",
+      "report_types": [
+        "observed-data"
+      ],
+      "published": "2026-01-01T10:00:00Z",
+      "object_refs": [
+        "identity--bd397f91-9cdd-40fd-9b36-458849698bd0",
+        "domain-name--5ac6b142-3d17-5640-87a6-acf0a7272ad6",
+        "indicator--4eb53415-e042-402e-af9e-f585113e8ce9",
+        "domain-name--ff48593a-2b32-5bdf-a1e9-57b6fd88fff3",
+        "indicator--c65de773-fdab-4370-ab0f-f5e3ceed639d",
+        "domain-name--c109cae3-435a-53f8-a646-8d17a1ef629e",
+        "indicator--49355e5f-5962-4aef-9fc2-7b6185600d93",
+        "ipv4-addr--c2a97333-cd14-5dbc-b416-6a39a80416f5",
+        "ipv4-addr--e604c759-042b-5f45-8a47-c00e3abde48a",
+        "note--9d1c635c-9709-4af6-b47e-8c8d52796a0c"
+      ],
+      "confidence": 60,
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "marking-definition",
+      "spec_version": "2.1",
+      "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+      "created": "2017-01-20T00:00:00.000Z",
+      "definition_type": "tlp",
+      "name": "TLP:GREEN",
+      "definition": {
+        "tlp": "green"
+      }
+    }
+  ]
+}

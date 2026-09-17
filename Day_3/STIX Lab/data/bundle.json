@@ -1,0 +1,271 @@
+{
+  "type": "bundle",
+  "id": "bundle--5ff6e408-929f-4e8e-a8fc-38f9063c3c00",
+  "objects": [
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4f0b3e06-0a53-4c71-b5e6-0b5e018664d1",
+      "created": "2026-09-17T22:11:43.555208Z",
+      "modified": "2026-09-17T22:11:43.555208Z",
+      "name": "Ascent CTI Team",
+      "identity_class": "organization",
+      "sectors": [
+        "technology"
+      ],
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1272091c-6dcb-4ee6-906b-889463183a8c",
+      "created": "2026-09-17T22:11:43.555453Z",
+      "modified": "2026-09-17T22:11:43.555453Z",
+      "name": "AeroParts Supplier Ltd",
+      "identity_class": "organization",
+      "sectors": [
+        "aerospace"
+      ],
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "threat-actor",
+      "spec_version": "2.1",
+      "id": "threat-actor--53821f35-5a0f-4b7d-9a4d-aa6d186125a1",
+      "created": "2026-09-17T22:11:43.55551Z",
+      "modified": "2026-09-17T22:11:43.55551Z",
+      "name": "UNC-Falcon",
+      "threat_actor_types": [
+        "spy"
+      ],
+      "sophistication": "advanced",
+      "resource_level": "organization",
+      "primary_motivation": "organizational-gain",
+      "confidence": 70,
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--78941387-e611-4a3f-8f1c-9d57e55ee7dd",
+      "created": "2026-09-17T22:11:43.555589Z",
+      "modified": "2026-09-17T22:11:43.555589Z",
+      "name": "Spearphishing Link",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "url": "https://attack.mitre.org/techniques/T1566/002/",
+          "external_id": "T1566.002"
+        }
+      ],
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "malware",
+      "spec_version": "2.1",
+      "id": "malware--2ecc0633-b170-4a75-bdb4-d8c41a77374b",
+      "created": "2026-09-17T22:11:43.555631Z",
+      "modified": "2026-09-17T22:11:43.555631Z",
+      "name": "FalconDropper",
+      "malware_types": [
+        "dropper"
+      ],
+      "is_family": false,
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "domain-name",
+      "spec_version": "2.1",
+      "id": "domain-name--5ac6b142-3d17-5640-87a6-acf0a7272ad6",
+      "value": "aeroparts-hr-portal.com"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--c2a97333-cd14-5dbc-b416-6a39a80416f5",
+      "value": "185.199.51.23"
+    },
+    {
+      "type": "observed-data",
+      "spec_version": "2.1",
+      "id": "observed-data--62c0ea91-eb03-4814-b706-1d17c286ba30",
+      "created": "2026-09-17T22:11:43.555876Z",
+      "modified": "2026-09-17T22:11:43.555876Z",
+      "first_observed": "2026-09-10T08:00:00Z",
+      "last_observed": "2026-09-10T08:05:00Z",
+      "number_observed": 3,
+      "object_refs": [
+        "domain-name--5ac6b142-3d17-5640-87a6-acf0a7272ad6",
+        "ipv4-addr--c2a97333-cd14-5dbc-b416-6a39a80416f5"
+      ],
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--85189236-efb6-4d8d-a221-5306a390ec48",
+      "created": "2026-09-17T22:11:43.556068Z",
+      "modified": "2026-09-17T22:11:43.556068Z",
+      "name": "Phishing domain for AeroParts",
+      "pattern": "[domain-name:value = 'aeroparts-hr-portal.com']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-09-10T00:00:00Z",
+      "confidence": 80,
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--2382cb5d-1157-4d4d-85c0-942d1a565f9b",
+      "created": "2026-09-17T22:11:43.557866Z",
+      "modified": "2026-09-17T22:11:43.557866Z",
+      "relationship_type": "uses",
+      "source_ref": "threat-actor--53821f35-5a0f-4b7d-9a4d-aa6d186125a1",
+      "target_ref": "malware--2ecc0633-b170-4a75-bdb4-d8c41a77374b"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--bbc74f83-c840-4490-b1fe-a83fb68f2b86",
+      "created": "2026-09-17T22:11:43.559192Z",
+      "modified": "2026-09-17T22:11:43.559192Z",
+      "relationship_type": "uses",
+      "source_ref": "threat-actor--53821f35-5a0f-4b7d-9a4d-aa6d186125a1",
+      "target_ref": "attack-pattern--78941387-e611-4a3f-8f1c-9d57e55ee7dd"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--4a1e58da-38e2-4306-b72c-f404fe7f1138",
+      "created": "2026-09-17T22:11:43.559248Z",
+      "modified": "2026-09-17T22:11:43.559248Z",
+      "relationship_type": "targets",
+      "source_ref": "threat-actor--53821f35-5a0f-4b7d-9a4d-aa6d186125a1",
+      "target_ref": "identity--1272091c-6dcb-4ee6-906b-889463183a8c"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--a793d191-ef5b-4326-a523-8047819d6d20",
+      "created": "2026-09-17T22:11:43.559301Z",
+      "modified": "2026-09-17T22:11:43.559301Z",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--85189236-efb6-4d8d-a221-5306a390ec48",
+      "target_ref": "threat-actor--53821f35-5a0f-4b7d-9a4d-aa6d186125a1"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--6c861d95-be1d-4886-bc7a-d484b5a75608",
+      "created": "2026-09-17T22:11:43.559341Z",
+      "modified": "2026-09-17T22:11:43.559341Z",
+      "relationship_type": "communicates-with",
+      "source_ref": "malware--2ecc0633-b170-4a75-bdb4-d8c41a77374b",
+      "target_ref": "domain-name--5ac6b142-3d17-5640-87a6-acf0a7272ad6"
+    },
+    {
+      "type": "sighting",
+      "spec_version": "2.1",
+      "id": "sighting--c5ec219e-c0ab-4ed3-983e-3e1f7a2fdf9b",
+      "created": "2026-09-17T22:11:43.559383Z",
+      "modified": "2026-09-17T22:11:43.559383Z",
+      "first_seen": "2026-09-10T08:00:00Z",
+      "count": 3,
+      "sighting_of_ref": "indicator--85189236-efb6-4d8d-a221-5306a390ec48",
+      "where_sighted_refs": [
+        "identity--1272091c-6dcb-4ee6-906b-889463183a8c"
+      ],
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "opinion",
+      "spec_version": "2.1",
+      "id": "opinion--343a3279-95e6-4b8b-af1c-c1002ba95190",
+      "created": "2026-09-17T22:11:43.559448Z",
+      "modified": "2026-09-17T22:11:43.559448Z",
+      "explanation": "Domain reuse + ATT&CK overlap; source B2 (usually reliable, probably true).",
+      "opinion": "strongly-agree",
+      "object_refs": [
+        "indicator--85189236-efb6-4d8d-a221-5306a390ec48"
+      ],
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "note",
+      "spec_version": "2.1",
+      "id": "note--14c5586a-84a9-42cf-94cf-baa80d112f01",
+      "created": "2026-09-17T22:11:43.559494Z",
+      "modified": "2026-09-17T22:11:43.559494Z",
+      "abstract": "Provenance",
+      "content": "Collected via crt.sh + passive DNS on 2026-09-10. SHA-256 of evidence archived in the case file.",
+      "object_refs": [
+        "indicator--85189236-efb6-4d8d-a221-5306a390ec48",
+        "observed-data--62c0ea91-eb03-4814-b706-1d17c286ba30"
+      ],
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "report",
+      "spec_version": "2.1",
+      "id": "report--2d411d77-c5f7-412f-acda-52b85eb56d65",
+      "created_by_ref": "identity--4f0b3e06-0a53-4c71-b5e6-0b5e018664d1",
+      "created": "2026-09-17T22:11:43.559542Z",
+      "modified": "2026-09-17T22:11:43.559542Z",
+      "name": "UNC-Falcon phishing against AeroParts",
+      "report_types": [
+        "threat-actor"
+      ],
+      "published": "2026-09-11T09:00:00Z",
+      "object_refs": [
+        "threat-actor--53821f35-5a0f-4b7d-9a4d-aa6d186125a1",
+        "identity--1272091c-6dcb-4ee6-906b-889463183a8c",
+        "attack-pattern--78941387-e611-4a3f-8f1c-9d57e55ee7dd",
+        "malware--2ecc0633-b170-4a75-bdb4-d8c41a77374b",
+        "indicator--85189236-efb6-4d8d-a221-5306a390ec48",
+        "observed-data--62c0ea91-eb03-4814-b706-1d17c286ba30",
+        "sighting--c5ec219e-c0ab-4ed3-983e-3e1f7a2fdf9b",
+        "relationship--2382cb5d-1157-4d4d-85c0-942d1a565f9b",
+        "relationship--bbc74f83-c840-4490-b1fe-a83fb68f2b86",
+        "relationship--4a1e58da-38e2-4306-b72c-f404fe7f1138",
+        "relationship--a793d191-ef5b-4326-a523-8047819d6d20",
+        "relationship--6c861d95-be1d-4886-bc7a-d484b5a75608"
+      ],
+      "confidence": 75,
+      "object_marking_refs": [
+        "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82"
+      ]
+    },
+    {
+      "type": "marking-definition",
+      "spec_version": "2.1",
+      "id": "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82",
+      "created": "2017-01-20T00:00:00.000Z",
+      "definition_type": "tlp",
+      "name": "TLP:AMBER",
+      "definition": {
+        "tlp": "amber"
+      }
+    }
+  ]
+}

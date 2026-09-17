@@ -1,0 +1,123 @@
+{
+  "type": "bundle",
+  "id": "bundle--6ff7ac00-b0b1-4db9-aa51-0b896059230c",
+  "objects": [
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7c6514b4-1d07-4a8d-8209-7ac31f61f955",
+      "created": "2026-09-17T21:58:16.523488Z",
+      "modified": "2026-09-17T21:58:16.523488Z",
+      "name": "AeroParts Supplier Ltd",
+      "identity_class": "organization",
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "domain-name",
+      "spec_version": "2.1",
+      "id": "domain-name--5ac6b142-3d17-5640-87a6-acf0a7272ad6",
+      "value": "aeroparts-hr-portal.com"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--143f0328-c54c-4e1f-a9f2-beccbbd26608",
+      "created": "2026-09-17T21:58:16.52412Z",
+      "modified": "2026-09-17T21:58:16.52412Z",
+      "name": "OSINT domain aeroparts-hr-portal.com",
+      "pattern": "[domain-name:value = 'aeroparts-hr-portal.com']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "confidence": 60,
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "domain-name",
+      "spec_version": "2.1",
+      "id": "domain-name--ff48593a-2b32-5bdf-a1e9-57b6fd88fff3",
+      "value": "login-aeroparts.net"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--7ad6f471-0f94-458c-8c78-97fdc56199d3",
+      "created": "2026-09-17T21:58:16.526132Z",
+      "modified": "2026-09-17T21:58:16.526132Z",
+      "name": "OSINT domain login-aeroparts.net",
+      "pattern": "[domain-name:value = 'login-aeroparts.net']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "confidence": 60,
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--c2a97333-cd14-5dbc-b416-6a39a80416f5",
+      "value": "185.199.51.23"
+    },
+    {
+      "type": "observed-data",
+      "spec_version": "2.1",
+      "id": "observed-data--c88e2746-68b9-4158-ad2a-345de011513f",
+      "created": "2026-09-17T21:58:16.526461Z",
+      "modified": "2026-09-17T21:58:16.526461Z",
+      "first_observed": "2026-01-01T00:00:00Z",
+      "last_observed": "2026-01-01T00:00:00Z",
+      "number_observed": 1,
+      "object_refs": [
+        "domain-name--5ac6b142-3d17-5640-87a6-acf0a7272ad6",
+        "domain-name--ff48593a-2b32-5bdf-a1e9-57b6fd88fff3",
+        "ipv4-addr--c2a97333-cd14-5dbc-b416-6a39a80416f5"
+      ],
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "report",
+      "spec_version": "2.1",
+      "id": "report--a94d3b18-5194-45cf-8b2b-d7581a4492aa",
+      "created_by_ref": "identity--7c6514b4-1d07-4a8d-8209-7ac31f61f955",
+      "created": "2026-09-17T21:58:16.526549Z",
+      "modified": "2026-09-17T21:58:16.526549Z",
+      "name": "OSINT footprint: AeroParts Supplier Ltd",
+      "report_types": [
+        "observed-data"
+      ],
+      "published": "2026-01-01T09:00:00Z",
+      "object_refs": [
+        "identity--7c6514b4-1d07-4a8d-8209-7ac31f61f955",
+        "domain-name--5ac6b142-3d17-5640-87a6-acf0a7272ad6",
+        "indicator--143f0328-c54c-4e1f-a9f2-beccbbd26608",
+        "domain-name--ff48593a-2b32-5bdf-a1e9-57b6fd88fff3",
+        "indicator--7ad6f471-0f94-458c-8c78-97fdc56199d3",
+        "ipv4-addr--c2a97333-cd14-5dbc-b416-6a39a80416f5",
+        "observed-data--c88e2746-68b9-4158-ad2a-345de011513f"
+      ],
+      "confidence": 60,
+      "object_marking_refs": [
+        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+      ]
+    },
+    {
+      "type": "marking-definition",
+      "spec_version": "2.1",
+      "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+      "created": "2017-01-20T00:00:00.000Z",
+      "definition_type": "tlp",
+      "name": "TLP:GREEN",
+      "definition": {
+        "tlp": "green"
+      }
+    }
+  ]
+}
