@@ -1,0 +1,33 @@
+# docker-compose.yml - stand up n8n (and a throwaway web server) in seconds.
+# Usage:
+#   docker compose up -d n8n         # n8n at http://localhost:5678
+#   docker compose up -d web         # demo web server at http://localhost:8088
+#   docker compose down -v           # tear EVERYTHING down, including the volume
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: osint-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=UTC
+      - TZ=UTC
+      - N8N_SECURE_COOKIE=false          # ok for localhost lab; NOT for production
+      - N8N_DIAGNOSTICS_ENABLED=false     # opsec: no phone-home
+      - N8N_PERSONALIZATION_ENABLED=false
+    volumes:
+      - n8n_data:/home/node/.n8n          # the only thing that survives 'down' without -v
+
+  # a tiny disposable web server, to see how fast a container serves content
+  web:
+    image: nginx:alpine
+    container_name: osint-web
+    ports:
+      - "8088:80"
+    volumes:
+      - ./site:/usr/share/nginx/html:ro   # put an index.html in ./site
+    restart: "no"
+
+volumes:
+  n8n_data:

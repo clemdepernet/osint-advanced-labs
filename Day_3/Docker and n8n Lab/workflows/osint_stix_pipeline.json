@@ -1,0 +1,29 @@
+{
+  "name": "OSINT -> STIX (agentic, scheduled)",
+  "nodes": [
+    {"parameters": {"triggerTimes": {"item": [{"mode": "everyWeek", "weekday": 0, "hour": 6}]}},
+     "name": "Weekly 06:00 UTC", "type": "n8n-nodes-base.cron", "typeVersion": 1, "position": [220, 320]},
+    {"parameters": {"url": "https://crt.sh/?q=%25.<TARGET>&output=json", "responseFormat": "json",
+       "options": {"timeout": 30000}},
+     "name": "Agent: subdomains (crt.sh)", "type": "n8n-nodes-base.httpRequest", "typeVersion": 3, "position": [460, 200]},
+    {"parameters": {"url": "https://news.google.com/rss/search?q=<TARGET>", "responseFormat": "string"},
+     "name": "Agent: news (RSS)", "type": "n8n-nodes-base.httpRequest", "typeVersion": 3, "position": [460, 440]},
+    {"parameters": {"functionCode": "// merge partials from the two agents + map to STIX 2.1\n// (mirror backend/osint_to_stix.py from the STIX Lab)\nconst domains = [...new Set(($json.body || []).map(x => x.name_value).filter(Boolean))];\nconst bundle = { type: 'bundle', id: 'bundle--' + $now, objects: [] };\nfor (const d of domains) {\n  bundle.objects.push({ type: 'domain-name', value: d });\n  bundle.objects.push({ type: 'indicator', pattern_type: 'stix', pattern: `[domain-name:value = '${d}']`, valid_from: new Date().toISOString(), confidence: 60 });\n}\nreturn [{ json: bundle }];"},
+     "name": "Writer: build STIX bundle", "type": "n8n-nodes-base.function", "typeVersion": 1, "position": [720, 320]},
+    {"parameters": {"url": "https://opencti.example.org/graphql", "method": "POST", "jsonParameters": true,
+       "options": {}},
+     "name": "Load into OpenCTI / TAXII", "type": "n8n-nodes-base.httpRequest", "typeVersion": 3, "position": [980, 320]},
+    {"parameters": {"functionCode": "// diff vs last run stored in static data -> alert on new objects\nconst prev = $getWorkflowStaticData('global').lastIds || [];\nconst now = ($json.objects || []).map(o => o.pattern || o.value).filter(Boolean);\nconst added = now.filter(x => !prev.includes(x));\n$getWorkflowStaticData('global').lastIds = now;\nreturn added.length ? [{ json: { alert: 'new intelligence', added } }] : [];"},
+     "name": "Alert on change", "type": "n8n-nodes-base.function", "typeVersion": 1, "position": [980, 480]}
+  ],
+  "connections": {
+    "Weekly 06:00 UTC": {"main": [[{"node": "Agent: subdomains (crt.sh)", "type": "main", "index": 0},
+                                   {"node": "Agent: news (RSS)", "type": "main", "index": 0}]]},
+    "Agent: subdomains (crt.sh)": {"main": [[{"node": "Writer: build STIX bundle", "type": "main", "index": 0}]]},
+    "Agent: news (RSS)": {"main": [[{"node": "Writer: build STIX bundle", "type": "main", "index": 0}]]},
+    "Writer: build STIX bundle": {"main": [[{"node": "Load into OpenCTI / TAXII", "type": "main", "index": 0},
+                                            {"node": "Alert on change", "type": "main", "index": 0}]]}
+  },
+  "active": false, "settings": {},
+  "_comment": "Import via n8n UI: Workflows -> Import from File. Replace <TARGET> and the OpenCTI URL. The two agents run in parallel from the trigger, converge on the writer, then fan out to load + alert."
+}
