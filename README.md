@@ -44,6 +44,10 @@ Each day's slide deck is the `*.pptx` in its folder. Each lab folder has its own
 | [Linux Basics](Cheatsheets/01_Linux_Basics_Cheatsheet.pdf) | moving around the terminal, files, pipes, permissions |
 | [Bash Scripting](Cheatsheets/02_Bash_Scripting_Cheatsheet.pdf) | variables, conditions, loops, functions, good habits |
 | [Kali & OSINT Tools](Cheatsheets/03_Kali_OSINT_Tools_Cheatsheet.pdf) | sherlock, maigret, holehe, curl, hashcat, ffuf, exiftool, nmap… |
+| [Blockchain & Crypto](Cheatsheets/04_Blockchain_Crypto_Cheatsheet.pdf) | keys, addresses, ledger models, explorers, on-chain tracing, chokepoints |
+| [Dark Web](Cheatsheets/05_Dark_Web_Cheatsheet.pdf) | web layers, Tor, safe access, finding onions, deanonymisation, limits |
+| [Docker](Cheatsheets/06_Docker_Cheatsheet.pdf) | images/containers/volumes, run, compose, Dockerfile, cleanup, OPSEC |
+| [STIX 2.1](Cheatsheets/07_STIX_Cheatsheet.pdf) | SDO/SCO/SRO, TLP, confidence↔Admiralty, patterning, stix2, ATT&CK |
 
 ---
 
