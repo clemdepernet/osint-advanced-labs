@@ -16,12 +16,12 @@ instructor holds a methodology correction (`WriteUp_FR_CryptoInvestigation.md`).
 
 | Entity | Solana address (partial) |
 |---|---|
-| Token Mint ($TOK) | `7fuinNNcyXXXXXXXXXXXXXX1BVCnVwoXeVQ4cXP` |
-| Pair / Liquidity Pool | `E5ihhxqKYnzpXXXXXXXXXXwpQAHmtTKJhKZMWN8v9` |
+| Token Mint ($TOK) | `7fuinNNcyLmJh2eZKhVB6p5FTcBjiBVCnVwoXeVQ4cXP` |
+| Pair / Liquidity Pool | `E5ihhxqKYnzp...wpQAHmtTKJhKZMWN8v9` |
 | Wrapped SOL Mint | `So11111111111111111111111111111111111111112` |
 
-> Replace the partial addresses with the real ones your instructor provides. The **method** is
-> what is graded, and it transfers to any token.
+> These are the real on-chain identifiers of the case (Solana addresses are public ledger data).
+> The **method** is what is graded, and it transfers to any token.
 
 ### Learning objectives
 
